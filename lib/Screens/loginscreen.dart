@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:whatsappcopy/Screens/otpscreen.dart';
 import 'package:whatsappcopy/Widgets/uihelper.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -19,6 +20,15 @@ class _LoginScreenState extends State<LoginScreen> {
     "Iraq",
     "Qatar",
   ];
+
+  login(String phoneNumber){
+    if(phoneNumber==""){
+      return ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Enter Your Phone Number"), backgroundColor: Color(0xFF00A884),));
+    }
+    else{
+      Navigator.push(context, MaterialPageRoute(builder: (context)=> OtpScreen(phonenumber: phoneNumber,)));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -94,7 +104,7 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
       floatingActionButton: UiHelper.CustomButton(
           callback: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context)=> LoginScreen()));
+            login(phoneController.text.toString());
           }, buttonname: "Next"
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
